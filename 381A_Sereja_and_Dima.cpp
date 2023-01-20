@@ -1,9 +1,8 @@
 #include <iostream>
 using namespace std;
-#include <algorithm>
 int main()
 {
-    int n, ans = 0, Sereja = 0, Dima = 0;
+    int n, min, j;
     cin >> n;
     int arr[n];
 
@@ -11,43 +10,20 @@ int main()
     {
         cin >> arr[i];
     }
-    int l = 0, r = n - 1;
 
-    while (l <= r)
+    for (int i = 0; i < n; i++)
     {
-        bool cycle = true;
-        if (cycle == true)
+        min = arr[i];
+        j = i - 1;
+        for (; j >= 0 && arr[j] > min; j--)
         {
-            if (arr[l] <= arr[r])
-            {
-                Sereja += arr[r];
-                r--;
-            }
-            else
-            {
-                Sereja += arr[l];
-                l++;
-            }
-            cycle = false;
+            arr[j + 1] = arr[j];
         }
-        if (l > r)
-            break;
-
-        if (cycle == false)
-
-        {
-            if (arr[l] < arr[r])
-            {
-                Dima += arr[r];
-                r--;
-            }
-            else
-            {
-                Dima += arr[l];
-                l++;
-            }
-        }
+        arr[j + 1] = min;
     }
-    cout << Sereja << endl;
-    cout << Dima;
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
 }
